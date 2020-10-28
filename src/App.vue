@@ -1,19 +1,63 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <Header/>
+      <AddTodo />
+      <Todo
+        v-bind:todos="todos"
+        v-on:del-todo="deleteTodo"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Todo from "./components/Todo.vue";
+import AddTodo from "./components/AddTodo.vue";
+import Header from "./components/layout/Header.vue";
+
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Todo,
+    AddTodo,
+    Header
+  },
+  data() {
+    return {
+      todos: [
+        { id: 1, title: "todoasdas 1", isCompleted: true },
+        {
+          id: 2,
+          title: "todoasdasd 2",
+          isCompleted: false,
+        },
+        {
+          id: 3,
+          title: "tododsad 3",
+          isCompleted: true,
+        },
+        {
+          id: 4,
+          title: "tododsad 4",
+          isCompleted: true,
+        },
+      ],
+    };
+  },
+  methods: {
+    deleteTodo(id) {
+      this.todos = this.todos.filter((todo) => todo.id !== id);
+    },
+    // AddTodo(e) {
+    //   this.todos = [
+    //     ...this.todos,
+    //     { id: this.todos.length + 1, title: e, isCompleted: false },
+    //   ];
+    // },
+  },
+};
 </script>
 
 <style>
@@ -24,5 +68,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  justify-content: center;
 }
 </style>
