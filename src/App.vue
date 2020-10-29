@@ -1,63 +1,22 @@
 <template>
   <div id="app">
-    <div>
-      <Header/>
-      <AddTodo />
-      <Todo
-        v-bind:todos="todos"
-        v-on:del-todo="deleteTodo"
-      />
+    <Header/>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
     </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Todo from "./components/Todo.vue";
-import AddTodo from "./components/AddTodo.vue";
-import Header from "./components/layout/Header.vue";
-
-
+import Header from './components/layout/Header'
 export default {
-  name: "App",
-  components: {
-    Todo,
-    AddTodo,
+  name:"App",
+  components:{
     Header
-  },
-  data() {
-    return {
-      todos: [
-        { id: 1, title: "todoasdas 1", isCompleted: true },
-        {
-          id: 2,
-          title: "todoasdasd 2",
-          isCompleted: false,
-        },
-        {
-          id: 3,
-          title: "tododsad 3",
-          isCompleted: true,
-        },
-        {
-          id: 4,
-          title: "tododsad 4",
-          isCompleted: true,
-        },
-      ],
-    };
-  },
-  methods: {
-    deleteTodo(id) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
-    },
-    // AddTodo(e) {
-    //   this.todos = [
-    //     ...this.todos,
-    //     { id: this.todos.length + 1, title: e, isCompleted: false },
-    //   ];
-    // },
-  },
-};
+  }
+}
 </script>
 
 <style>
@@ -67,8 +26,21 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

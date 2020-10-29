@@ -13,7 +13,7 @@ export default {
 
 <style  scoped>
 header{
-background: cornflowerblue;
+background: #42b983;
 font-size: 2rem;
 font-weight: 600;
 color: cornsilk;

@@ -1,16 +1,13 @@
 <template>
-  <div style="margin: auto 0%" class="todo-div">
-     <!-- <div class="flex -center">
-    <input type="text" v-on:change="getValue" /><button
-      v-on:click="$emit('add-todo', todoText)"
-    >
-      +
-    </button>
-  </div> -->
+  <div  class="todo-div">
     <div v-bind:key="todo.id" v-for="todo in todos" style="width: 100%">
       <TodoItem
         v-bind:todoitem="todo"
         v-on:del-todo="$emit('del-todo', todo.id)"
+        v-on:update-todo="$emit('update-todo', todo)"
+        v-on:updated="$emit('updated', updateTodo);"
+        v-bind:updateTodo="updateTodo"
+
       />
     </div>
   </div>
@@ -20,7 +17,7 @@
 import TodoItem from "./TodoItem.vue";
 export default {
   name: "Todo",
-  props: ["todos"],
+  props: ["todos","updateTodo"],
   components: {
     TodoItem,
   },
@@ -33,9 +30,7 @@ export default {
     getValue(e) {
       this.todoText = e.target.value;
     },
-    AddTodo() {
-      console.log("======", this.todoText);
-    },
+   
   },
 };
 </script>
@@ -63,6 +58,8 @@ a {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 50px;
+  margin-top: 40px;
 }
 input {
   margin-top: 10px;
